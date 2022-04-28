@@ -4,7 +4,6 @@
   import Post from '~/components/Post.vue';
   import { useProfilePicture } from '~/hooks/profilePicture';
   import { useContext, useFetch } from '@nuxtjs/composition-api';
-  import enrichContent from '~/utils/enrich-content';
 
   const { $axios } = useContext();
   const profilePicture = useProfilePicture();
