@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noUnusedLocals": false,
     "target": "ES2018",
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -15,7 +16,18 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@nuxt/types", "@nuxtjs/axios", "@types/node"]
+    "types": [
+      "@nuxt/types",
+      "@types/node",
+      "unplugin-vue2-script-setup/types",
+      "unplugin-vue2-script-setup/ref-macros",
+      "@nuxtjs/axios",
+      "@nuxtjs/auth-next",
+      "vue-sweetalert2"
+    ]
   },
-  "exclude": ["node_modules", ".nuxt", "dist"]
+  "exclude": ["node_modules", ".nuxt", "dist"],
+  "vueCompilerOptions": {
+    "experimentalCompatMode": 2
+  },
 }
