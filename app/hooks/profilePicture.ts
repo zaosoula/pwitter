@@ -1,11 +1,17 @@
 import { useContext } from '@nuxtjs/composition-api';
+import { User } from '~/models';
 
-export const useProfilePicture = (identifier?: any) => {
-  if(!identifier) {
+const getUrl = (str: string) => `https://avatars.dicebear.com/api/adventurer-neutral/${str}.svg?scale=69&flip=1`;
+
+export const useProfilePicture = (obj?: string | User) => {
+  if(!obj) {
     const { $auth: { user } } = useContext();
-    identifier = user?.username || user?.email;
+    return getUrl((user?.username || user?.email || 'anonymous') as string);
   }
 
+  if(typeof obj === 'string') {
+    return getUrl(obj);
+  }
 
-  return `https://avatars.dicebear.com/api/adventurer-neutral/${identifier}.svg?scale=69&flip=1`;
+  return getUrl(obj.username || obj.email);
 }
