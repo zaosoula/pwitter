@@ -1,15 +1,13 @@
 <script lang="ts" setup>
   import { useProfilePicture } from '~/hooks/profilePicture';
-  import enrichContent from '~/utils/enrich-content';
-  const profilePicture = useProfilePicture();
+  import { useEnrichContent } from '../hooks/enrichContent';
+  import { Post } from '~/models/post';
 
-  const { data: post } = defineProps({
-    data: {
-      type: Object,
-      required: true
-    }
-  })
+  const props = defineProps<{
+    data: Post
+  }>();
 
+  const post = useEnrichContent(props.data);
 </script>
 
 <template>
@@ -24,7 +22,7 @@
       </div>
       <div class="post-meta">
         <div class="description">
-          <p v-html="enrichContent(post.content)"></p>
+          <p v-html="post.content"></p>
         </div>
       </div>
     </div>

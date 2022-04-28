@@ -3,7 +3,6 @@
   import PostForm from '~/components/PostForm.vue';
   import { useProfilePicture } from '~/hooks/profilePicture';
   import { useContext, useFetch } from '@nuxtjs/composition-api';
-  import enrichContent from '~/utils/enrich-content';
 
   const { $axios } = useContext();
   const profilePicture = useProfilePicture();
@@ -49,7 +48,7 @@
                         </div>
                         <div class="post-meta">
                           <div class="description">
-                            <p v-html="enrichContent(post.content)"></p>
+                            <p v-html="post.content"></p>
                           </div>
                         </div>
                       </div>
