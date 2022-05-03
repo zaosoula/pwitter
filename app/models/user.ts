@@ -1,5 +1,6 @@
 import { Post } from '~/models/post';
 export interface User {
+  id: number;
   email: string;
   username: string;
   sign_in_count: number;
@@ -13,4 +14,9 @@ export interface User {
   created_at: string | Date;
   updated_at: string | Date;
   posts: Post[];
+  is_following?: boolean;
+  followers?: number;
+  followings?: number;
 }
+
+export type UserFull = Required<User>;
