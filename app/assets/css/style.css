@@ -4723,12 +4723,12 @@ canvas {
 }
 
 .top-area > ul.main-menu > li::after {
-    content: "";
+    /* content: "";
     font-family: fontawesome;
     font-size: 13px;
     position: absolute;
     right: 10px;
-    top: 0;
+    top: 0; */
 }
 
 .top-area > ul.main-menu > li > ul li {
