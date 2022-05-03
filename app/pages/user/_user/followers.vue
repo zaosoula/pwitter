@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { UserFull } from '~/models';
+import type { UserFull, Follow } from '~/models';
 
 import { useRoute, useContext, useFetch } from '@nuxtjs/composition-api';
 import { useProfilePicture } from '~/hooks/profilePicture';
@@ -9,7 +9,7 @@ const { $axios } = useContext();
 const route = $(useRoute());
 
 let user = $ref<UserFull>();
-let followers = $ref<any>();
+let followers = $ref<Follow[]>();
 
 useFetch(async () => {
    const [userResponse, followersResponse] = await Promise.all([$axios.get(`/users/${route.params.user}`), $axios.get(`/users/${route.params.user}/followers`)]);
