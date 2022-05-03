@@ -94,6 +94,7 @@ export default {
   },
 
   router: {
-    middleware: ['auth']
+    middleware: ['auth'],
+    linkExactActiveClass: 'active'
   }
 }
