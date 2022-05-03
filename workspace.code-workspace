@@ -7,5 +7,10 @@
 			"path": "api"
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"extensions": {
+		"recommendations": [
+			"endverbraucher.pack-rails"
+		]
+	}
 }
