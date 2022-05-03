@@ -3,11 +3,11 @@
   import { useEnrichContent } from '../hooks/enrichContent';
   import { Post } from '~/models/post';
 
-  const props = defineProps<{
+  const { data: post } = defineProps<{
     data: Post
   }>();
 
-  const post = useEnrichContent(props.data);
+  const content = useEnrichContent(post);
 </script>
 
 <template>
@@ -22,7 +22,7 @@
       </div>
       <div class="post-meta">
         <div class="description">
-          <p v-html="post.content"></p>
+          <component :is="content" />
         </div>
       </div>
     </div>
