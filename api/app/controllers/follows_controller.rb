@@ -9,11 +9,12 @@ class FollowsController < ApplicationController
   end
 
   def followings
+    # Retreive all users followed by the @user
     @follows = Follow.where(["source_id = ?", @user.id]).except(:updated_at).all
   end
 
   def followers
-    puts @user.id
+    # Retreive all users following the @user
     @follows = Follow.where(["target_id = ?", @user.id]).except(:updated_at).all
   end
 
@@ -56,6 +57,7 @@ class FollowsController < ApplicationController
       true if Float(string) rescue false
     end  
 
+    # Find an user using either its id or username
     def find_user
       if is_number?(params[:id])
         @user = User.find(params[:id])
