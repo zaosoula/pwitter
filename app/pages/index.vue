@@ -11,7 +11,7 @@
   let posts = $ref([]);
 
   const { fetch: refreshPosts } = useFetch(async () => {
-   const response = await $axios.get('/posts');
+   const response = await $axios.get('/feed');
    posts = response.data;
   })
 </script>
