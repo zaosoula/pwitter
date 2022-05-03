@@ -15,7 +15,6 @@ useFetch(async () => {
    const [userResponse, followersResponse] = await Promise.all([$axios.get(`/users/${route.params.user}`), $axios.get(`/users/${route.params.user}/followers`)]);
    user = userResponse.data;
    followers = followersResponse.data;
-   console.log({...followers});
 })
 </script>
 

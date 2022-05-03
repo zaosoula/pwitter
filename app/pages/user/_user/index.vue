@@ -12,7 +12,6 @@ let user = $ref<UserFull>();
 useFetch(async () => {
    const response = await $axios.get(`/users/${route.params.user}`);
    user = response.data;
-   console.log({...user});
 })
 </script>
 
