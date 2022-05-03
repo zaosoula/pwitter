@@ -6,4 +6,8 @@ class FeedController < ApplicationController
     followings << current_user.id # Add current user to the list
     @posts = Post.where(user_id: followings).order(created_at: "DESC"); # Retreive all posts
   end
+
+  def hashtag
+    @posts = Post.where(["lower(content) LIKE lower(?)", "%#"+params[:hashtag]+"%"]).order(created_at: "DESC")
+  end
 end

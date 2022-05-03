@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  # before_action :authenticate_user!
-
   scope :api, defaults: {format: :json} do
     resources :examples
-    resources :posts
-    resources :follows, only: [:get, :create, :update, :destroy]
-    resources :feed, only: [:index]
     
+    resources :posts
+    
+    resources :follows, only: [:get, :create, :update, :destroy]
+
+    resources :feed, only: [:index]
+    get '/feed/hashtag/:hashtag', to: 'feed#hashtag'
+
     devise_for :users, controllers: {sessions: 'sessions'}
     devise_scope :user do
       get 'users/current', to: 'sessions#show'
@@ -15,7 +17,4 @@ Rails.application.routes.draw do
       get 'users/:id/followings', to: 'follows#followings'
     end
   end
-
-  # Defines the root path route ("/")
-  # root "home#index"
 end
