@@ -47,12 +47,15 @@
   import { useContext } from '@nuxtjs/composition-api';
 
   const emit = defineEmits(['submit']);
+  const props = defineProps<{
+    defaultContent?: string;
+  }>();
 
   const { $axios, $swal } = useContext();
   const profilePicture = useProfilePicture();
 
   const defaultFormInputs = {
-    content: '',
+    content: `${props.defaultContent} ` || '',
   }
 
   let formInputs = $ref({
