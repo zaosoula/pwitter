@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :examples
     resources :posts
     resources :follows, only: [:get, :create, :update, :destroy]
+    resources :feed, only: [:index]
+    
     devise_for :users, controllers: {sessions: 'sessions'}
     devise_scope :user do
       get 'users/current', to: 'sessions#show'
