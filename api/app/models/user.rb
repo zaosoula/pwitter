@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
   
-  has_many :posts
+  has_many :posts, -> { order("created_at DESC") }
 end
