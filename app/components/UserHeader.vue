@@ -3,6 +3,7 @@ import type { UserFull } from '~/models';
 
 import { useContext } from '@nuxtjs/composition-api';
 import { useProfilePicture } from '~/hooks/profilePicture';
+import { computed } from '@vue/reactivity';
 
 const props = defineProps<{
   user: UserFull
@@ -10,7 +11,9 @@ const props = defineProps<{
 
 const emit = defineEmits(['follow', 'unfollow']);
 
-const { $axios } = useContext();
+const { $axios, $auth } = useContext();
+
+const isLoggedUser = props.user.id == $auth.user?.id;
 
 const onFollowToggle = async () => {
   props.user.is_following ? await $axios.delete(`/follows/${props.user.id}`) : await $axios.post(`/follows`, { target_id: props.user.id });
@@ -28,7 +31,7 @@ const onFollowToggle = async () => {
         <figure><img src="https://source.unsplash.com/random/1000x333/?abstract,color" class="featured-photo" alt=""></figure>
         <div class="add-btn">
           <span>{{ user.followers }} followers</span>
-          <a href="#" title="" @click.prevent="onFollowToggle">{{ user.is_following ? 'Unfollow' : 'Follow' }}</a>
+          <a v-if="!isLoggedUser" @click.prevent="onFollowToggle" href="#">{{ user.is_following ? 'Unfollow' : 'Follow' }}</a>
         </div>
         <!-- <form class="edit-phto">
           <i class="fa fa-camera-retro"></i>
