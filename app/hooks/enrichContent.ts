@@ -9,11 +9,8 @@ export const useEnrichContent = (obj: string | Post): {name: string, template: s
     return useEnrichContent({ content: obj } as Post);
   }
 
-  const content = `<div>${enrichContent(obj.content)}</div>`;
-
-  console.log(content);
   return {
     name: "PostContent",
-    template: content
+    template: `<div>${enrichContent(obj.content)}</div>`
   }
 }
