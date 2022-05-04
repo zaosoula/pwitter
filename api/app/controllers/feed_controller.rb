@@ -35,7 +35,7 @@ class FeedController < ApplicationController
       if is_number?(params['id'])
         return params['id']
       else
-        return User.where(username: params['id']).first.id
+        return User.where(username: params['id']).first&.id
       end
     end
 end
