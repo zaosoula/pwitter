@@ -5,11 +5,7 @@ class PostsController < ApplicationController
   def create    
     @post = Post.new(post_params)
 
-    if @post.save
-      parse_hashtags
-      parse_mentions
-      render :show, status: :created, location: @post
-    else
+    if !@post.save
       render json: @post.errors, status: :unprocessable_entity
     end
   end
@@ -27,17 +23,5 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:content, :repost_id).with_defaults(content: '', repost_id: nil).merge(user_id: current_user.id)
-    end
-
-    def parse_hashtags
-      @post.content.scan(/#([\w\d_]+)/).each do |hashtag|
-        puts hashtag
-      end
-
-      puts @post
-    end
-
-    def parse_mentions
-
     end
 end
