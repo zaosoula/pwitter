@@ -63,10 +63,10 @@
   <div class="user-post">
     <div class="friend-info">
       <figure>
-        <a :href="`/user/${post.user.username}`" title=""><img :src="useProfilePicture(post.user.username || post.user.email)"></a>
+        <nuxt-link :to="`/user/${post.user.username}`" title=""><img :src="useProfilePicture(post.user.username || post.user.email)"></nuxt-link>
       </figure>
       <div class="friend-name">
-        <ins><a :href="`/user/${post.user.username}`" title="">{{ post.user.username }}</a></ins>
+        <ins><nuxt-link :to="`/user/${post.user.username}`" title="">{{ post.user.username }}</nuxt-link></ins>
         <span>{{ computeRelativeTime(post.created_at) }}</span>
       </div>
       <div class="post-meta">
