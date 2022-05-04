@@ -15,8 +15,10 @@
   const content = useEnrichContent(props.post);
 
   const handleLike = async () => {
-    console.log(props.post)
-    props.post.is_liked ? await $axios.delete(`/likes/${props.post.id}`) : await $axios.post(`/likes`, { post_id: props.post.id });
+    console.log(props.post);
+    await $axios(`/posts/${props.post.id}/like`, {
+      method: props.post.is_liked ? 'DELETE' : 'POST',
+    });
     props.post.is_liked = !props.post.is_liked;
     props.post.like_count = props.post.is_liked ? props.post.like_count + 1 : props.post.like_count -1;
   }
