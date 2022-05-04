@@ -12,7 +12,10 @@ Rails.application.routes.draw do
     delete '/posts/:id/like', to: 'likes#destroy'
 
 
-    devise_for :users, controllers: {sessions: 'sessions'}
+    devise_for :users, controllers: {
+      sessions: 'sessions',
+      registrations: 'registrations'
+    }
     devise_scope :user do
       get 'users/current', to: 'sessions#show'
       get 'users/:id', to: 'users#show'
