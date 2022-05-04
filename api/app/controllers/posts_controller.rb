@@ -2,19 +2,6 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
   before_action :authenticate_user!
 
-  # GET /posts
-  # GET /posts.json
-  def index
-    @posts = Post.order("created_at DESC").all
-  end
-
-  # GET /posts/1
-  # GET /posts/1.json
-  def show
-  end
-
-  # POST /posts
-  # POST /posts.json
   def create    
     @post = Post.new(post_params)
 
@@ -27,18 +14,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
-  def update
-    if @post.update(post_params)
-      render :show, status: :ok, location: @post
-    else
-      render json: @post.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @post.destroy
   end
