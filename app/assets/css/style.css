@@ -712,11 +712,14 @@ header.sticky {
     vertical-align: inherit;
 }
 
-.top-area .user-img > img {
-    border-radius: 50%;
+.top-area .user-img a {
     display: inline-block;
     transform: scale(0.7);
     vertical-align: inherit;
+}
+
+.top-area .user-img a img{
+    border-radius: 50%;
 }
 
 .form-search {
