@@ -114,7 +114,7 @@ export default {
                 <ins>{{post.like_count}}</ins>
               </span>
             </li>
-            <li>
+            <li v-show="post.content">
               <span class="repost" data-toggle="tooltip" title="" data-original-title="Repost" @click.prevent="handleRepost">
                 <IconRepeat />
                 <ins>{{post.repost_count}}</ins>
