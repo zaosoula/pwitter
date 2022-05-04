@@ -1455,13 +1455,12 @@ form button {
     font-weight: 400;
     margin-right: 3px;
     position: relative;
+    cursor: pointer;
+    transition: all 0.2s linear 0s;
 }
 
-.we-video-info > ul li.upload-date {
-    float: right;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
+.we-video-info > ul li span:hover {
+  transform: scale(1.1);
 }
 
 .upload-date > i {
@@ -1472,11 +1471,6 @@ form button {
     text-transform: capitalize;
 }
 
-.we-video-info > ul li span.dislike {
-    color: red;
-    cursor: pointer;
-    transition: all 0.2s linear 0s;
-}
 
 .we-video-info > ul li span ins {
     font-size: 11px;
@@ -1486,15 +1480,7 @@ form button {
     top: -10px;
 }
 
-.we-video-info > ul li span.like {
-    color: green;
-    cursor: pointer;
-    transition: all 0.2s linear 0s;
-}
 
-.we-video-info > ul li span.like:hover .we-video-info > ul li span.dislike:hover {
-    trnsform: scale(1.1);
-}
 
 
 /*--- social icons opening hovers style ---*/

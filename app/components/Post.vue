@@ -1,18 +1,30 @@
+<script lang="ts">
+export default {
+  name: "Post"
+}
+</script>
 <script lang="ts" setup>
+  import { useContext, computed } from '@nuxtjs/composition-api';
+
+  import * as T from '~/models/post';
+
   import { useProfilePicture } from '~/hooks/profilePicture';
-  import { useEnrichContent } from '../hooks/enrichContent';
-  import { Post } from '~/models/post';
+  import { useEnrichContent } from '~/hooks/enrichContent';
   import IconHeart from '~/components/icon/heart.vue';
   import IconHeartFilled from '~/components/icon/heart-filled.vue';
-  import { useContext } from '@nuxtjs/composition-api';
+  import IconRepeat from '~/components/icon/repeat.vue';
+
 
   const props = defineProps<{
-    post: Post
+    post: T.Post
+    repost?: boolean
   }>();
 
   const { $axios } = useContext();
 
   const content = useEnrichContent(props.post);
+
+  const isReposting = computed(() => typeof props.post.repost !== 'undefined');
 
   const handleLike = async () => {
     console.log(props.post);
@@ -74,8 +86,11 @@
       <div class="post-meta">
         <div class="description">
           <component :is="content" />
+          <div class="repost_container" v-if="isReposting">
+            <Post repost :post="post.repost"/>
+          </div>
         </div>
-        <div class="we-video-info">
+        <div class="we-video-info" v-if="!repost">
           <ul>
             <!-- <li>
               <span class="comment" data-toggle="tooltip" title="" data-original-title="Comments">
@@ -84,9 +99,15 @@
               </span>
             </li> -->
             <li>
-              <span class="like" data-toggle="tooltip" title="" data-original-title="like" @click.prevent="handleLike">
+              <span class="like" data-toggle="tooltip" title="" data-original-title="Like" @click.prevent="handleLike">
                 <component :is="post.is_liked ? IconHeartFilled : IconHeart" />
                 <ins>{{post.like_count}}</ins>
+              </span>
+            </li>
+            <li>
+              <span class="repost" data-toggle="tooltip" title="" data-original-title="Repost" @click.prevent="handleRepost">
+                <IconRepeat />
+                <ins>{{post.repost_count}}</ins>
               </span>
             </li>
           </ul>
@@ -101,5 +122,11 @@ svg {
   width: 1em;
   height: 1em;
   color: inherit;
+}
+
+.repost_container {
+  margin-top: 1em;
+  padding: 1em;
+  border: 1px solid #ede9e9;
 }
 </style>
