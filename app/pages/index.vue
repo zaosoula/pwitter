@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import type * as T from '~/models';
+
   import Shortcut from '~/components/Shortcut.vue';
   import PostForm from '~/components/PostForm.vue';
   import Post from '~/components/Post.vue';
@@ -8,7 +10,7 @@
   const { $axios } = useContext();
   const profilePicture = useProfilePicture();
 
-  let posts = $ref([]);
+  let posts = $ref<T.Post[]>([]);
 
   const { fetch: refreshPosts } = useFetch(async () => {
    const response = await $axios.get('/feed');
