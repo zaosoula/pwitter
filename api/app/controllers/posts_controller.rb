@@ -51,7 +51,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:content).merge(user_id: current_user.id)
+      params.require(:post).permit(:content, :repost_id).with_defaults(content: '', repost_id: nil).merge(user_id: current_user.id)
     end
 
     def parse_hashtags
