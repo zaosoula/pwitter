@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     resources :feed, only: [:index]
     get '/feed/hashtag/:hashtag', to: 'feed#hashtag'
 
-    resources :likes
+    post '/posts/:id/like', to: 'likes#create'
+    delete '/posts/:id/like', to: 'likes#destroy'
 
     devise_for :users, controllers: {sessions: 'sessions'}
     devise_scope :user do
