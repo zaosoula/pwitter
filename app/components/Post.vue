@@ -35,6 +35,12 @@ export default {
     props.post.like_count = props.post.is_liked ? props.post.like_count + 1 : props.post.like_count -1;
   }
 
+  const handleRepost = async () => {
+    const { data } = await $axios.post('/posts', {
+      repost_id: props.post.id
+    });
+  }
+
   const computeRelativeTime = (time: string | Date) => {
     if(typeof time === 'string') {
       time = new Date(time);
