@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_30_125603) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_04_101405) do
   create_table "examples", force: :cascade do |t|
     t.string "name"
     t.string "colour"
@@ -29,6 +29,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_125603) do
     t.string "jti", null: false
     t.datetime "exp"
     t.index ["jti"], name: "index_jwt_blacklists_on_jti"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|

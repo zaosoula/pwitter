@@ -6,4 +6,7 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
   
   has_many :posts, -> { order("created_at DESC") }
+
+  has_many :likes
+  has_many :liked_posts, :through => :likes, :source => :post
 end
