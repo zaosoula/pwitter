@@ -6,8 +6,8 @@
   import IconHeartFilled from '~/components/icon/heart-filled.vue';
   import { useContext } from '@nuxtjs/composition-api';
 
-  const { data: post } = defineProps<{
-    data: Post
+  const props = defineProps<{
+    post: Post
   }>();
 
   const { $axios } = useContext();
@@ -19,6 +19,7 @@
     props.post.is_liked ? await $axios.delete(`/likes/${props.post.id}`) : await $axios.post(`/likes`, { post_id: props.post.id });
     props.post.is_liked = !props.post.is_liked;
     props.post.like_count = props.post.is_liked ? props.post.like_count + 1 : props.post.like_count -1;
+  }
 
   const computeRelativeTime = (time: string | Date) => {
     if(typeof time === 'string') {

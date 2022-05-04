@@ -176,7 +176,7 @@ useFetch(async () => {
                       :key="post.id"
                       class="central-meta item"
                     >
-                      <Post :data="{...post, user}" />
+                      <Post :post="{...post, user}" />
                     </div>
                   </div>
                 </div><!-- centerl meta -->

@@ -40,7 +40,7 @@
                     :key="post.id"
                     class="central-meta item"
                   >
-                    <Post :data="post" />
+                    <Post :post="post" />
                   </div>
 								</div>
 							</div>
