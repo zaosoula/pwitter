@@ -3,7 +3,6 @@ import type { UserFull } from '~/models';
 
 import { useContext } from '@nuxtjs/composition-api';
 import { useProfilePicture } from '~/hooks/profilePicture';
-import { computed } from '@vue/reactivity';
 
 const props = defineProps<{
   user: UserFull
@@ -17,7 +16,7 @@ const isLoggedUser = props.user.id == $auth.user?.id;
 
 const onFollowToggle = async () => {
   props.user.is_following ? await $axios.delete(`/follows/${props.user.id}`) : await $axios.post(`/follows`, { target_id: props.user.id });
-  props.user.is_following = !props.user.is_following
+  props.user.is_following = !props.user.is_following;
   props.user.followers = props.user.is_following ? props.user.followers + 1 : props.user.followers -1;
 
   props.user.is_following ? emit('follow') : emit('unfollow');
