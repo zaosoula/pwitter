@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   scope :api, defaults: {format: :json} do
     
     resources :posts
+    get '/feed/user/:id', to: 'feed#user'
     
     resources :follows, only: [:get, :create, :update, :destroy]
 
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
       get 'users/:id', to: 'users#show'
       get 'users/:id/followers', to: 'follows#followers'
       get 'users/:id/followings', to: 'follows#followings'
+      get 'users/:id/feed', to: 'feed#user'
     end
   end
 end

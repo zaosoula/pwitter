@@ -6,9 +6,7 @@ class LikesController < ApplicationController
   def create
     @like = Like.new(like_params)
 
-    if @like.save
-      render :show, status: :created, location: @like
-    else
+    if !@like.save
       render json: @like.errors, status: :unprocessable_entity
     end
   end
@@ -22,6 +20,6 @@ class LikesController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def like_params
-      params.require(:like).permit(:post_id).merge(user_id: current_user.id)
+      params.permit(:post_id).with_defaults(post_id: params[:id]).merge(user_id: current_user.id)
     end
 end
