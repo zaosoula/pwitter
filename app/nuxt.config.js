@@ -72,9 +72,9 @@ export default {
 
   auth: {
     redirect: {
-      login: '/login',
-      logout: '/',
-      callback: '/login',
+      login: '/landing',
+      logout: '/landing',
+      callback: '/landing',
       home: '/'
     },
     strategies: {
@@ -91,7 +91,7 @@ export default {
         },
         endpoints: {
           login: { url: '/users/sign_in', method: 'post' },
-          logout: { url: '/users/sign_out', method: 'post' },
+          logout: { url: '/users/sign_out', method: 'delete' },
           user: { url: '/users/current', method: 'get' }
         }
       }
