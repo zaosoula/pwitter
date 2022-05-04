@@ -2,12 +2,23 @@
   import { useProfilePicture } from '~/hooks/profilePicture';
   import { useEnrichContent } from '../hooks/enrichContent';
   import { Post } from '~/models/post';
+  import IconHeart from '~/components/icon/heart.vue';
+  import IconHeartFilled from '~/components/icon/heart-filled.vue';
+  import { useContext } from '@nuxtjs/composition-api';
 
   const { data: post } = defineProps<{
     data: Post
   }>();
 
-  const content = useEnrichContent(post);
+  const { $axios } = useContext();
+
+  const content = useEnrichContent(props.post);
+
+  const handleLike = async () => {
+    console.log(props.post)
+    props.post.is_liked ? await $axios.delete(`/likes/${props.post.id}`) : await $axios.post(`/likes`, { post_id: props.post.id });
+    props.post.is_liked = !props.post.is_liked;
+    props.post.like_count = props.post.is_liked ? props.post.like_count + 1 : props.post.like_count -1;
 
   const computeRelativeTime = (time: string | Date) => {
     if(typeof time === 'string') {
@@ -61,7 +72,31 @@
         <div class="description">
           <component :is="content" />
         </div>
+        <div class="we-video-info">
+          <ul>
+            <!-- <li>
+              <span class="comment" data-toggle="tooltip" title="" data-original-title="Comments">
+                <i class="fa fa-comments-o"></i>
+                <ins>52</ins>
+              </span>
+            </li> -->
+            <li>
+              <span class="like" data-toggle="tooltip" title="" data-original-title="like" @click.prevent="handleLike">
+                <component :is="post.is_liked ? IconHeartFilled : IconHeart" />
+                <ins>{{post.like_count}}</ins>
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<style>
+svg {
+  width: 1em;
+  height: 1em;
+  color: inherit;
+}
+</style>
