@@ -20,6 +20,8 @@ export default {
     repost?: boolean
   }>();
 
+  const emit = defineEmits(["repost"]);
+
   const { $axios } = useContext();
 
   const content = useEnrichContent(props.post);
@@ -39,6 +41,8 @@ export default {
     const { data } = await $axios.post('/posts', {
       repost_id: props.post.id
     });
+
+    emit("repost", data);
   }
 
   const computeRelativeTime = (time: string | Date) => {

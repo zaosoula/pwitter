@@ -10,7 +10,7 @@ const route = $(useRoute());
 
 let user = $ref<T.UserFull>();
 let posts = $ref<T.Post[]>();
-useFetch(async () => {
+const { fetch: refetch } = useFetch(async () => {
   await Promise.all([
     $axios
       .get(`/users/${route.params.user}`)
@@ -183,7 +183,7 @@ useFetch(async () => {
                       :key="post.id"
                       class="central-meta item"
                     >
-                      <Post :post="post" />
+                      <Post :post="post" @repost="refresh" />
                     </div>
                   </div>
                 </div><!-- centerl meta -->
