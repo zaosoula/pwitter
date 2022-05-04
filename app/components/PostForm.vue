@@ -33,7 +33,7 @@
               </label>
             </li> -->
             <li>
-              <button type="submit">Post</button>
+              <button type="submit" :disabled="formInputs.content.length === 0 || formInputs.content === defaultFormInputs.content">Post</button>
             </li>
           </ul>
         </div>
@@ -55,7 +55,7 @@
   const profilePicture = useProfilePicture();
 
   const defaultFormInputs = {
-    content: `${props.defaultContent} ` || '',
+    content: props.defaultContent ? `${props.defaultContent} ` : '',
   }
 
   let formInputs = $ref({
