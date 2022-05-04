@@ -1,6 +1,7 @@
 if @user
-  json.(@user, :id, :email, :username, :current_sign_in_at, :last_sign_in_at)
-  json.is_following @is_following
+  json.(@user, :id, :username)
   json.followers @followers
   json.following @following
+  json.is_following @is_following
+  json.post_count @user.posts.count
 end
