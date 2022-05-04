@@ -52,7 +52,7 @@ export default {
     const plural = (num: number) => num !== 1 ? 's' : '';
     const format = (value: number, unit: string) => `${value} ${unit}${plural(value)} ago`;
 
-    let diff = (Date.now() - time.getTime()) / 1000;
+    let diff = Math.round((Date.now() - time.getTime()) / 1000);
 
     if (diff<60) {
       return format(diff, 'second');
