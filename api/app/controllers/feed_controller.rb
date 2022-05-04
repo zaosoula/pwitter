@@ -3,8 +3,13 @@ class FeedController < ApplicationController
 
   def index
     followings = Follow.where(source_id: current_user.id).pluck(:target_id) # Find all user followed by the current user
-    followings << current_user.id # Add current user to the list
-    @posts = Post.where(user_id: followings).order(created_at: "DESC"); # Retreive all posts
+    if followings.length == 0
+      @posts = Post.order(created_at: "DESC").all; # Retreive all posts
+    else
+      followings << current_user.id # Add current user to the list
+      @posts = Post.where(user_id: followings).order(created_at: "DESC"); # Retreive all posts from followings
+    end
+    
   end
 
   def hashtag
