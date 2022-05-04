@@ -462,16 +462,10 @@ iframe {
     font-size: 30px;
     line-height: 40px;
     text-align: center;
-    transform: rotate(-15deg);
     transition: all 0.2s linear 0s;
     width: 40px;
     z-index: 99;
 }
-
-#topcontrol:hover {
-    transform: rotate(0);
-}
-
 
 /*--- sticky header ---*/
 
