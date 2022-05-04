@@ -3,14 +3,14 @@
     <h4 class="widget-title">Shortcuts</h4>
     <ul class="naves">
       <li>
-        <i class="ti-clipboard"></i>
-        <a href="newsfeed.html" title="">News feed</a>
+        <i class="ti-home"></i>
+        <nuxt-link to="/">Home</nuxt-link>
       </li>
       <li>
-        <i class="ti-mouse-alt"></i>
-        <a href="inbox.html" title="">Inbox</a>
+        <i class="ti-user"></i>
+        <nuxt-link :to="`/user/${$auth.user.username}`">My Profile</nuxt-link>
       </li>
-      <li>
+      <!-- <li>
         <i class="ti-files"></i>
         <a href="fav-page.html" title="">My pages</a>
       </li>
@@ -41,10 +41,10 @@
       <li>
         <i class="fa fa-bar-chart-o"></i>
         <a href="insights.html" title="">insights</a>
-      </li>
+      </li> -->
       <li>
         <i class="ti-power-off"></i>
-        <a href="landing.html" title="">Logout</a>
+        <a href="#" @click.prevent="() => $auth.logout()">Logout</a>
       </li>
     </ul>
   </div><!-- Shortcuts -->
