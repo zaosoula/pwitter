@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { UserFull } from '~/models';
+import type * as T from '~/models';
 
 import { useRoute, useContext, useFetch } from '@nuxtjs/composition-api';
 import Post from '~/components/Post.vue';
@@ -8,10 +8,17 @@ import UserHeader from '~/components/UserHeader.vue';
 const { $axios } = useContext();
 const route = $(useRoute());
 
-let user = $ref<UserFull>();
+let user = $ref<T.UserFull>();
+let posts = $ref<T.Post[]>();
 useFetch(async () => {
-   const response = await $axios.get(`/users/${route.params.user}`);
-   user = response.data;
+  await Promise.all([
+    $axios
+      .get(`/users/${route.params.user}`)
+      .then(({ data }) => user = data),
+    $axios
+      .get(`/users/${route.params.user}/feed`)
+      .then(({ data }) => posts = data)
+  ])
 })
 </script>
 
@@ -172,11 +179,11 @@ useFetch(async () => {
                   </div>add post new box -->
                   <div class="loadMore">
                     <div
-                      v-for="post of user.posts"
+                      v-for="post of posts"
                       :key="post.id"
                       class="central-meta item"
                     >
-                      <Post :post="{...post, user}" />
+                      <Post :post="post" />
                     </div>
                   </div>
                 </div><!-- centerl meta -->
