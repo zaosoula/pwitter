@@ -72,7 +72,7 @@
     const response = await $axios.post('/posts', formInputs);
 
 
-    if(response.status !== 201) {
+    if(response.status >= 300) {
       return $swal('An unexpected error occured');
     }
 
