@@ -29,7 +29,6 @@ export default {
   const isReposting = computed(() => typeof props.post.repost !== 'undefined');
 
   const handleLike = async () => {
-    console.log(props.post);
     await $axios(`/posts/${props.post.id}/like`, {
       method: props.post.is_liked ? 'DELETE' : 'POST',
     });
