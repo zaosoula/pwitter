@@ -15,7 +15,7 @@ const { $axios, $auth } = useContext();
 const isLoggedUser = props.user.id == $auth.user?.id;
 
 const onFollowToggle = async () => {
-  props.user.is_following ? await $axios.delete(`/follows/${props.user.id}`) : await $axios.post(`/follows`, { target_id: props.user.id });
+  props.user.is_following ? await $axios.delete(`/users/${props.user.username}/follow`) : await $axios.post(`/users/${props.user.username}/follow`);
   props.user.is_following = !props.user.is_following;
   props.user.followers = props.user.is_following ? props.user.followers + 1 : props.user.followers -1;
 
